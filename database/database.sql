@@ -16,6 +16,11 @@
 -- ('Tatooine',23, 200000,'Arido'),
 -- ('Alderaan',24,2000000000,'Templado');
 -- -- Tabla `naves`
+-- INSERT INTO `naves` (`planeta_id`, `nombre`, `modelo`, `tripulacion`, `pasajeros`, `clase_nave`) VALUES
+-- (1,'CR90 corvette','CR90 corvette','165','600','corvette'),
+-- (2,'Star Destroyer','Imperial I-class Star','47600','100000','Star destroyer');
+
+
 
 -- CREATE TABLE  `naves` (
 --   `id` INT NOT NULL AUTO_INCREMENT,
@@ -31,6 +36,11 @@
 --   CONSTRAINT `fk_naves_planetas` FOREIGN KEY (`planeta_id`) REFERENCES `planetas` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 -- );
 
+-- INSERT INTO `pilotos` (`nombre`, `altura`, `anio_nacimiento`, `genero`)
+-- VALUES
+-- ('Luke Skywalker', 172, '19BBY', 'Masculino'),
+-- ('C-3PO', 167, '112BBY', 'Masculino'),
+-- ('Jar Jar Binks', 196, '52BBY', 'Masculino');
 
 -- -- Tabla `pilotos`
 
@@ -45,6 +55,10 @@
 --   PRIMARY KEY (`id`)
 -- );
 
+-- INSERT INTO `mantenimientos` (`idnave`, `fecha`, `descripcion`, `coste`)
+-- VALUES
+-- (1, NOW(),'La nave tuvo un pequeño accidente chocandose con un asteroide',200432.54 ),
+-- (2, NOW(), 'Alguien entró al hyperespacio al lado de la nave, el piloto no fue muy listo',99999999.99);
 
 -- -- Tabla `mantenimientos`
 
@@ -63,6 +77,10 @@
 
 -- -- Tabla Pivote `nave_piloto`
 
+-- INSERT INTO `nave_piloto` (`nave_id`, `piloto_id`, `fecha_asociacion`, `fecha_fin_asociacion`)
+-- VALUES
+-- (1, 1, NOW(), NULL),
+-- (2, 3, NOW(), NULL);
 
 -- CREATE TABLE `nave_piloto` (
 --   `nave_id` INT  NOT NULL,
@@ -78,6 +96,8 @@
 --   CONSTRAINT `fk_np_naves` FOREIGN KEY (`nave_id`) REFERENCES `naves` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 --   CONSTRAINT `fk_np_pilotos` FOREIGN KEY (`piloto_id`) REFERENCES `pilotos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 -- );
+
+
 
 
 
