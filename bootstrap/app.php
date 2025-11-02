@@ -20,11 +20,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo('/api/nologin');
         $middleware->alias([
             'todas' => CheckAbilities::class,
-            'alguna' => CheckForAnyAbility::class,
+            'alguno' => CheckForAnyAbility::class,
             'midadmin' =>midAdmin::class,
             'midgestor'=>midGestor::class,
             'miduser'=>midUser::class,
-            
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('altura')->nullable();
             $table->string('anio_nacimiento')->nullable();
             $table->string('genero')->nullable();
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }

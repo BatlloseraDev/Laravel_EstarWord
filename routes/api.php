@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\CloudinaryController;
 use App\Http\Controllers\EjercicioController;
 
 use App\Http\Controllers\NaveController;
+use App\Http\Controllers\PilotoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,24 +57,29 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('gestionarNavePiloto')->group(function () {
         Route::post('/asignar/{idnave}/{idpiloto}', [EjercicioController::class, 'asignarPiloto'])
-        ->where(['idnave' => '[0-9]+','idpiloto' => '[0-9]+'])
-        ->middleware('alguno: midadmin, midgestor');
+            ->where(['idnave' => '[0-9]+', 'idpiloto' => '[0-9]+'])
+            ->middleware('alguno: midadmin, midgestor');
         Route::put('/desasignar/{idnave}/{idpiloto}', [EjercicioController::class, 'desasignarPiloto'])
-        ->where(['idnave' => '[0-9]+','idpiloto' => '[0-9]+'])
-        ->middleware('alguno: midadmin, midgestor');
+            ->where(['idnave' => '[0-9]+', 'idpiloto' => '[0-9]+'])
+            ->middleware('alguno: midadmin, midgestor');
     });
 
 
+    Route::post('/subirImagen/{idpiloto}', [CloudinaryController::class, 'subirImagenCloud'])->where('idpiloto', '[0-9]+')->middleware('alguno: midadmin, midgestor');
+
     Route::post('/CrearMantenimiento', [EjercicioController::class, 'addMantenimiento'])
-    ->middleware('alguno: midadmin, midgestor');
+        ->middleware('alguno: midadmin, midgestor');
 
 
 
 });
 
 
-
-
+Route::prefix('pilotos')->group(function () {
+    Route::put('/{id}', [PilotoController::class, 'updatePiloto'])->where('id', '[0-9]+')->middleware('alguno: midadmin, midgestor');
+    Route::delete('/{id}', [PilotoController::class, 'deletePiloto'])->where('id', '[0-9]+')->middleware('alguno: midadmin, midgestor');
+    Route::post('/', [PilotoController::class, 'addPiloto'])->middleware('alguno: midadmin, midgestor');
+});
 
 
 
