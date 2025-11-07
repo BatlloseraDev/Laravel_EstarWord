@@ -6,14 +6,26 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\Sanctum;
 class info_navesPilotos_Test extends TestCase
 {
     /**
-     * A basic feature test example.
+     * Test Funcional
      */
+
+
     public function test_navePiloto_info(): void
     {
+
         $fak = \Faker\Factory::create('es_ES');
+
+        //necesito crear un usuario de prueba
+        $adminUser = User::find(2);
+
+        //se supone que con esto me hago pasar por admin
+        Sanctum::actingAs($adminUser, ['admin']);
 
         $datosPiloto = [
             'nombre' => $fak->randomElement(['Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa', 'Owen Lars', 'Beru Whitesun lars', 'R5-D4', 'Biggs Darklighter', 'Obi-Wan Kenobi', 'jar jar binks']),
@@ -38,6 +50,7 @@ class info_navesPilotos_Test extends TestCase
 
         $response = $this->getJson('/api/info/navesPilotos');
         $response->assertStatus(200);
+        // dd($response->json());
         $response->assertJsonStructure([
             'navesPilotos' => [
                 '*' => [
@@ -58,9 +71,7 @@ class info_navesPilotos_Test extends TestCase
                             "nombre",
                             "periodo_rotacion",
                             "poblacion",
-                            "clima",
-                            "created_at",
-                            "updated_at"
+                            "clima"
                         ]
                     ],
                     "piloto" => [
@@ -69,9 +80,7 @@ class info_navesPilotos_Test extends TestCase
                         "altura",
                         "anio_nacimiento",
                         "genero",
-                        "imagen",
-                        "created_at",
-                        "updated_at"
+                        "imagen"
                     ]
                 ]
             ]

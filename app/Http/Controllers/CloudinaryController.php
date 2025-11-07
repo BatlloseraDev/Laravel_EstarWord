@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class CloudinaryController extends Controller
 {
-    public function subirImagenCloud(Request $request)
+    public function subirImagenCloud(Request $request, $idpiloto)
     {
 
         $messages = [
@@ -32,24 +32,20 @@ class CloudinaryController extends Controller
             try {
                 $file = $request->file('image');
 
-                // Generamos un nombre único para la imagen
-                // Obtenemos nombre y extensión por separado
                 $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $extension = $file->getClientOriginalExtension();
 
 
-                // Generamos nombre único y seguro
                 $filename = uniqid('img_') . '_' . Str::slug($originalName) . '.' . $extension;
 
 
                 $uploadedFilePath = Storage::disk('cloudinary')->putFileAs('laravel', $file, $filename);
 
-                // Obtenemos la URL pública
+
                 $url = Storage::disk('cloudinary')->url($uploadedFilePath);
 
 
-                //Asigno la imagen al piloto
-                $piloto = Piloto::findOrFail($request->param('idpiloto'));
+                $piloto = Piloto::findOrFail($idpiloto);
                 $piloto->imagen = $url;
                 $piloto->save();
 

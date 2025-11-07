@@ -20,7 +20,7 @@ class midUser
         if ($user->tokenCan("usuario")) {
             return $next($request);
         } else {
-            return response()->json(["success" => false, "message" => "No autorizado"], 202);
+            return response()->json(["success" => false, "message" => "No autorizado"], 401);
         }
     }
 }

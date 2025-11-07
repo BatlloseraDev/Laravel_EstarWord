@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "7046b3e0-433a-495a-afa6-931f7a74db0c",
+		"name": "Laravel EstarWord",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48599462"
+	},
+	"item": [
+		{
+			"name": "imagen",
+			"item": [
+				{
+					"name": "cambiar imagen",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|chUr7lx9sAPccS0XgGuzf7oVXyfk5gylGRNZ6mkG6a2fa3ec",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1f0bc085-9c02-4410-abd2-6d4f4151fd7f"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/subirImagen/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"subirImagen",
+								"4"
+							],
+							"query": [
+								{
+									"key": "imagen",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get naves",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|NJSwLW0S5C2DyCHrvXDycvLpHo6GAWJLeZXxlJNlcaaf1d4d",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/naves/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"naves",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Nave",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/naves/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"naves",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Nave",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"planeta_id\":2,\r\n    \"nombre\":\"Millennium Falcon\",\r\n    \"modelo\":\"YT-1300 light freighter\",\r\n    \"tripulacion\":4,\r\n    \"pasajeros\":6,\r\n    \"clase_nave\":\"Light freighter\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/naves/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"naves",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/naves/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"naves",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "apiInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/info",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "asignar Nave Piloto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/gestionarNavePiloto/asignar/10/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"gestionarNavePiloto",
+						"asignar",
+						"10",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "desasignar Nave piloto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/gestionarNavePiloto/desasignar/10/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"gestionarNavePiloto",
+						"desasignar",
+						"10",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "naves sin piloto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/navesSinPiloto",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"navesSinPiloto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pilotos Nave Historico",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pilotosConNaveHistorico",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pilotosConNaveHistorico"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pilotos Nave Actual",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pilotosConNaveActual",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pilotosConNaveActual"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Mantenimiento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idnave\":1,\r\n    \"fecha\":\"2025-10-25\",\r\n    \"descripcion\":\"asdfghjk asdfghjk \",\r\n    \"coste\": 28.01\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/CrearMantenimiento",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"CrearMantenimiento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"admin\",\r\n    \"email\":\"admin@email.com\",\r\n    \"password\":\"admin1234\",\r\n    \"confirm_password\":\"admin1234\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/api/register",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

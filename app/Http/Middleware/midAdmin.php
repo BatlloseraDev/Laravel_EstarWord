@@ -21,7 +21,7 @@ class midAdmin
         if ($user->tokenCan("admin")) {
             return $next($request);
         } else {
-            return response()->json(["success" => false, "message" => "No autorizado"], 202);
+            return response()->json(["success" => false, "message" => "No autorizado"], 401);
         }
     }
 }

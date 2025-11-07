@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Http\Request;
 
 use App\Models\Nave;
+use Validator;
 
 
 class EjercicioController extends Controller
@@ -144,6 +145,36 @@ class EjercicioController extends Controller
 
     public function addMantenimiento(Request $req)
     {
+        $messages = [
+            'idnave.required' => 'La nave para el mantenimiento es obligatoria.',
+            'idnave.integer' => 'El ID de la nave debe ser un número.',
+            'idnave.exists' => 'La nave seleccionada no existe en nuestra base de datos.',
+
+            'fecha.required' => 'La fecha del mantenimiento es obligatoria.',
+            'fecha.date_format' => 'La fecha no tiene el formato correcto. Use AAAA-MM-DD.',
+
+            'descripcion.string' => 'La descripción debe ser una cadena de texto.',
+
+            'coste.numeric' => 'El coste debe ser un valor numérico.',
+            'coste.min' => 'El coste no puede ser un valor negativo.',
+        ];
+
+        $rules = [
+            'idnave' => 'required|integer|exists:naves,id',
+            'fecha' => 'required|date_format:Y-m-d',
+            'descripcion' => 'nullable|string',
+            'coste' => 'nullable|numeric|min:0',
+        ];
+
+        // 3. Crea la instancia del validador
+        $validator = Validator::make($req->all(), $rules, $messages);
+
+        // 4. Comprueba si la validación falla
+        if ($validator->fails()) {
+            // Devuelve los errores en formato JSON con estado 422
+            return response()->json($validator->errors(), 422);
+        }
+
         try {
             $mantenimiento = new Mantenimiento;
             $mantenimiento = $mantenimiento->create($req->all());
@@ -180,99 +211,108 @@ class EjercicioController extends Controller
         }
     }
 
-    public function getNavesPilotos(){
+    public function getNavesPilotos()
+    {
         try {
             $navesPilotos = Nave_Piloto::with(['nave.planeta', 'piloto'])->get();
-            return response()->json(['navesPilotos ' => $navesPilotos], 200);
-        }catch (\Exception $e) {
+            return response()->json(['navesPilotos' => $navesPilotos], 200);
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getPlaneta($id){
+    public function getPlaneta($id)
+    {
         try {
             $planeta = Planeta::findOrFail($id);
             return response()->json(['planeta ' => $planeta], 200);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getPlanetas(){
+    public function getPlanetas()
+    {
         try {
             $planetas = Planeta::all();
             return response()->json(['planetas ' => $planetas], 200);
-        }catch( \Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getPiloto($id){
+    public function getPiloto($id)
+    {
         try {
             $piloto = Piloto::findOrFail($id);
             return response()->json(['piloto ' => $piloto], 200);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getPilotos(){
+    public function getPilotos()
+    {
         try {
             $pilotos = Piloto::all();
             return response()->json(['pilotos ' => $pilotos], 200);
-        }catch( \Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getMantenimento($id){
+    public function getMantenimento($id)
+    {
         try {
             $mantenimiento = Mantenimiento::findOrFail($id);
             return response()->json(['mantenimiento ' => $mantenimiento], 200);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getMantenimientos(){
+    public function getMantenimientos()
+    {
         try {
             $mantenimientos = Mantenimiento::all();
             return response()->json(['mantenimientos ' => $mantenimientos], 200);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getUsuario($id){
+    public function getUsuario($id)
+    {
         try {
             $usuario = User::findOrFail($id);
             return response()->json(['usuario ' => $usuario], 200);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
         }
     }
 
-    public function getUsuarios(){
+    public function getUsuarios()
+    {
         try {
             $usuarios = User::all();
             return response()->json(['usuarios ' => $usuarios], 200);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
